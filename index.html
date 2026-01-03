@@ -20,161 +20,144 @@
 
     <style>
       :root {
-          --bg-color: #0a0a0a;
-          --accent-color: #ff512f;
-          --accent-gradient: linear-gradient(135deg, #ff512f, #dd2476);
-          --text-light: #ffffff;
-          --text-sub: #f0f0f0;
+        --bg-color: #0a0a0a;
+        --accent-color: #ff512f;
+        --accent-gradient: linear-gradient(135deg, #ff512f, #dd2476);
+        --text-light: #ffffff;
+        --text-sub: #f0f0f0;
       }
-
       body {
-          background-color: var(--bg-color);
-          color: white;
-          font-family: "Poppins", sans-serif;
-          scroll-behavior: smooth;
+        background-color: var(--bg-color);
+        color: white;
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
       }
-
-      /* --- HERO SECTION --- */
       .hero-section {
-          position: relative;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          overflow: hidden;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
       }
-
       .video-bg-full {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          min-width: 100%;
-          min-height: 100%;
-          width: auto;
-          height: auto;
-          z-index: -1;
-          transform: translate(-50%, -50%);
-          object-fit: cover;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
       }
-
       .overlay-dark {
-          position: absolute;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.6);
-          z-index: 0;
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 0;
       }
-
-      /* --- PRICING CARDS --- */
       .pricing-card {
-          border-radius: 24px;
-          overflow: hidden;
-          border: 2px solid transparent;
-          transition: 0.4s;
-          height: 100%;
-          cursor: pointer;
-          position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        transition: 0.4s;
+        height: 100%;
+        cursor: pointer;
+        position: relative;
       }
-
-      .card-single { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("Gambar1.jpg") no-repeat center; background-size: cover; }
-      .card-variant { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("Gambar2.jpg") no-repeat center; background-size: cover; }
-      .card-double { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("Gambar3.jpg") no-repeat center; background-size: cover; }
-
-      .card-body-custom { padding: 40px 25px; text-align: center; }
-
-      .pricing-card:hover, .pricing-card.active {
-          border-color: var(--accent-color);
-          transform: translateY(-10px);
-          box-shadow: 0 15px 40px rgba(255, 81, 47, 0.4);
+      .card-single {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("Gambar1.jpg") no-repeat center;
+        background-size: cover;
       }
-
-      /* --- GRID PLOTS --- */
+      .card-variant {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("Gambar2.jpg") no-repeat center;
+        background-size: cover;
+      }
+      .card-double {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("Gambar3.jpg") no-repeat center;
+        background-size: cover;
+      }
+      .card-body-custom {
+        padding: 40px 25px;
+        text-align: center;
+      }
+      .pricing-card:hover,
+      .pricing-card.active {
+        border-color: var(--accent-color);
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(255, 81, 47, 0.4);
+      }
       .plot {
-          aspect-ratio: 1/1;
-          border-radius: 6px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 11px;
-          background: #1a1a1a;
-          border: 1px solid #333;
-          cursor: pointer;
-          color: #fff;
-          transition: 0.2s;
+        aspect-ratio: 1/1;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        cursor: pointer;
+        color: #fff;
+        transition: 0.2s;
       }
-      .plot.disabled { opacity: 0.05; cursor: not-allowed; }
+      .plot.disabled {
+        opacity: 0.05;
+        cursor: not-allowed;
+      }
       .plot.selected {
-          background: var(--accent-gradient);
-          border: none;
-          font-weight: bold;
-          transform: scale(1.1);
-          box-shadow: 0 0 15px var(--accent-color);
+        background: var(--accent-gradient);
+        border: none;
+        font-weight: bold;
+        transform: scale(1.1);
+        box-shadow: 0 0 15px var(--accent-color);
       }
-
-      /* --- FIX FORM KONFIRMASI BOOKING --- */
       .form-dark {
-          background-color: #000000 !important; /* Latar belakang hitam pekat */
-          border: 1px solid #333 !important;
-          color: #ffffff !important; /* Teks putih saat mengetik */
-          padding: 12px 15px;
-          border-radius: 8px;
+        background-color: #000000 !important;
+        border: 1px solid #333 !important;
+        color: #ffffff !important;
+        padding: 12px 15px;
+        border-radius: 8px;
       }
-
-      /* Menghilangkan background putih otomatis dari browser */
       .form-dark:focus {
-          background-color: #000000 !important;
-          color: #ffffff !important;
-          border-color: var(--accent-color) !important;
-          box-shadow: 0 0 0 0.25 margin-bottom: rgba(255, 81, 47, 0.25);
-          outline: none;
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        border-color: var(--accent-color) !important;
+        outline: none;
       }
-
-      /* Perbaikan untuk Autofill browser agar tidak jadi putih */
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus {
-          -webkit-text-fill-color: white !important;
-          -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
-          transition: background-color 5000s ease-in-out 0s;
-      }
-
       label.small {
-          color: #ffffff;
-          font-weight: 500;
-          margin-bottom: 8px;
-          display: block;
+        color: #ffffff;
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
       }
-
       .booking-container {
-          background: #0f0f0f;
-          border: 1px solid #222;
-          padding: 30px;
-          border-radius: 20px;
+        background: #0f0f0f;
+        border: 1px solid #222;
+        padding: 30px;
+        border-radius: 20px;
       }
-
       .res-display {
-          background: #000;
-          border: 1px solid #ff512f;
-          color: white;
-          padding: 15px;
-          border-radius: 10px;
-          text-align: center;
-          font-weight: bold;
-          margin-bottom: 25px;
+        background: #000;
+        border: 1px solid #ff512f;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 25px;
       }
-
       .btn-booking {
-          background: var(--accent-gradient);
-          border: none;
-          color: white;
-          font-weight: 800;
-          padding: 15px;
-          border-radius: 8px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          transition: 0.3s;
-      }
-      .btn-booking:hover {
-          opacity: 0.9;
-          transform: scale(1.02);
+        background: var(--accent-gradient);
+        border: none;
+        color: white;
+        font-weight: 800;
+        padding: 15px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
       }
     </style>
   </head>
@@ -184,7 +167,6 @@
         <source src="Video1.mp4" type="video/mp4" />
       </video>
       <div class="overlay-dark"></div>
-
       <div class="container" style="position: relative; z-index: 2">
         <p
           class="text-uppercase fw-bold mb-3"
@@ -292,7 +274,7 @@
                   </li>
                   <li>
                     <i class="fas fa-check-circle me-2 text-danger"></i> Pagar
-                    Pembatas Tanaman
+                    Pembatas
                   </li>
                   <li>
                     <i class="fas fa-check-circle me-2 text-danger"></i> Lokasi
@@ -320,7 +302,7 @@
             <h2 class="fw-bold mb-2">
               Pilih <span style="color: var(--accent-color)">Lokasi</span>
             </h2>
-            <p class="mb-4" style="color: #ffffff">
+            <p class="mb-4">
               Silakan pilih slot aktif sesuai paket Anda (Blok A-J).
             </p>
             <div
@@ -335,7 +317,6 @@
               "
             ></div>
           </div>
-
           <div class="col-lg-5 ps-lg-5 mt-5 mt-lg-0">
             <div class="booking-container">
               <h4 class="mb-4 fw-bold text-white text-center">
@@ -343,6 +324,12 @@
               </h4>
               <form id="finalForm">
                 <div class="res-display">
+                  <input
+                    type="hidden"
+                    name="tipe_slot"
+                    id="input-tipe-slot"
+                    value=""
+                  />
                   <span id="res-paket">Single</span> |
                   <span id="res-slot" class="text-warning">Pilih Slot</span>
                 </div>
@@ -350,6 +337,7 @@
                 <label class="small">Nama Lengkap Pemesan</label>
                 <input
                   type="text"
+                  name="nama_pemesan"
                   class="form-control form-dark mb-3"
                   placeholder="Nama Pemesan"
                   required
@@ -358,22 +346,21 @@
                 <label class="small">Nomor WhatsApp</label>
                 <input
                   type="tel"
+                  name="nomor_whatsapp"
                   class="form-control form-dark mb-4"
                   placeholder="08123xxx"
                   required
                 />
 
                 <hr style="border-color: #333" />
-                <h6
-                  class="text-danger fw-bold mb-3"
-                  style="font-size: 0.9rem; letter-spacing: 1px"
-                >
+                <h6 class="text-danger fw-bold mb-3" style="font-size: 0.9rem">
                   DATA ALMARHUM/AH
                 </h6>
 
                 <label class="small">Nama Lengkap Almarhum</label>
                 <input
                   type="text"
+                  name="nama_almarhum"
                   class="form-control form-dark mb-3"
                   placeholder="Nama Almarhum"
                   required
@@ -381,16 +368,30 @@
 
                 <div class="row mb-4">
                   <div class="col-6">
-                    <label class="small">Tanggal Lahir</label>
-                    <input type="date" class="form-control form-dark" />
+                    <label class="small">Tgl Lahir</label>
+                    <input
+                      type="date"
+                      name="tanggal_lahir"
+                      class="form-control form-dark"
+                      required
+                    />
                   </div>
                   <div class="col-6">
-                    <label class="small">Tanggal Wafat</label>
-                    <input type="date" class="form-control form-dark" />
+                    <label class="small">Tgl Wafat</label>
+                    <input
+                      type="date"
+                      name="tanggal_wafat"
+                      class="form-control form-dark"
+                      required
+                    />
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-booking w-100">
+                <button
+                  type="submit"
+                  class="btn btn-booking w-100"
+                  id="btn-submit"
+                >
                   PESAN SEKARANG
                 </button>
               </form>
@@ -401,9 +402,13 @@
     </section>
 
     <script>
+      // GANTI URL DI BAWAH DENGAN URL WEB APP HASIL DEPLOY APPS SCRIPT
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbxYrPQ5bhxtW9efrcWhKgJJbO1AJuJYMy3fQE6UEAODbsBzGLTHlArVA_qEjJtq0O_L/exec";
+
+      const form = document.getElementById("finalForm");
       let currentPackage = "Single";
       let selectedSlot = null;
-
       const blocks = {
         Single: ["A", "B", "C", "D", "E"],
         "Single Varian": ["F", "G", "H"],
@@ -433,7 +438,6 @@
         const container = document.getElementById("gridPlot");
         container.innerHTML = "";
         const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-
         alphabet.forEach((letter) => {
           for (let i = 1; i <= 10; i++) {
             const slotId = letter + i;
@@ -452,6 +456,9 @@
                 selectedSlot = slotId;
                 document.getElementById("res-slot").innerText =
                   "Slot " + slotId;
+                // Simpan info paket + slot ke input hidden
+                document.getElementById("input-tipe-slot").value =
+                  currentPackage + " (" + selectedSlot + ")";
               };
             }
             container.appendChild(plot);
@@ -459,23 +466,53 @@
         });
       }
 
-      document.getElementById("finalForm").onsubmit = (e) => {
+      form.addEventListener("submit", (e) => {
         e.preventDefault();
-        if (!selectedSlot)
+
+        if (!selectedSlot) {
           return Swal.fire(
             "Pilih Slot!",
-            "Klik nomor lokasi pada peta di bawah.",
+            "Klik nomor lokasi pada peta.",
             "warning"
           );
-        Swal.fire(
-          "Berhasil!",
-          "Data telah terkirim. Admin kami akan menghubungi Anda melalui WhatsApp.",
-          "success"
-        );
-      };
+        }
+
+        const btn = document.getElementById("btn-submit");
+        btn.disabled = true;
+        btn.innerText = "MENGIRIM...";
+
+        Swal.fire({
+          title: "Sedang Mengirim...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        // Membuat data kiriman
+        const formData = new FormData(form);
+        formData.append("timestamp", new Date().toLocaleString("id-ID"));
+
+        fetch(scriptURL, { method: "POST", body: formData })
+          .then((response) => {
+            btn.disabled = false;
+            btn.innerText = "PESAN SEKARANG";
+            Swal.fire(
+              "Berhasil!",
+              "Booking Anda telah masuk ke sistem.",
+              "success"
+            );
+            form.reset();
+            changePackage("Single");
+          })
+          .catch((error) => {
+            btn.disabled = false;
+            btn.innerText = "PESAN SEKARANG";
+            Swal.fire("Error!", "Gagal mengirim data. Cek koneksi.", "error");
+          });
+      });
 
       renderGrid();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
