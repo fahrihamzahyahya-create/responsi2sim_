@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eternity | Premium Resting Place</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      :root {
+          --bg-color: #0a0a0a;
+          --accent-color: #ff512f;
+          --accent-gradient: linear-gradient(135deg, #ff512f, #dd2476);
+          --text-light: #ffffff;
+          --text-sub: #f0f0f0;
+      }
+
+      body {
+          background-color: var(--bg-color);
+          color: white;
+          font-family: "Poppins", sans-serif;
+          scroll-behavior: smooth;
+      }
+
+      /* --- HERO SECTION --- */
+      .hero-section {
+          position: relative;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+      }
+
+      .video-bg-full {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          min-width: 100%;
+          min-height: 100%;
+          width: auto;
+          height: auto;
+          z-index: -1;
+          transform: translate(-50%, -50%);
+          object-fit: cover;
+      }
+
+      .overlay-dark {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 0;
+      }
+
+      /* --- PRICING CARDS --- */
+      .pricing-card {
+          border-radius: 24px;
+          overflow: hidden;
+          border: 2px solid transparent;
+          transition: 0.4s;
+          height: 100%;
+          cursor: pointer;
+          position: relative;
+      }
+
+      .card-single { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("Gambar1.jpg") no-repeat center; background-size: cover; }
+      .card-variant { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("Gambar2.jpg") no-repeat center; background-size: cover; }
+      .card-double { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("Gambar3.jpg") no-repeat center; background-size: cover; }
+
+      .card-body-custom { padding: 40px 25px; text-align: center; }
+
+      .pricing-card:hover, .pricing-card.active {
+          border-color: var(--accent-color);
+          transform: translateY(-10px);
+          box-shadow: 0 15px 40px rgba(255, 81, 47, 0.4);
+      }
+
+      /* --- GRID PLOTS --- */
+      .plot {
+          aspect-ratio: 1/1;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          background: #1a1a1a;
+          border: 1px solid #333;
+          cursor: pointer;
+          color: #fff;
+          transition: 0.2s;
+      }
+      .plot.disabled { opacity: 0.05; cursor: not-allowed; }
+      .plot.selected {
+          background: var(--accent-gradient);
+          border: none;
+          font-weight: bold;
+          transform: scale(1.1);
+          box-shadow: 0 0 15px var(--accent-color);
+      }
+
+      /* --- FIX FORM KONFIRMASI BOOKING --- */
+      .form-dark {
+          background-color: #000000 !important; /* Latar belakang hitam pekat */
+          border: 1px solid #333 !important;
+          color: #ffffff !important; /* Teks putih saat mengetik */
+          padding: 12px 15px;
+          border-radius: 8px;
+      }
+
+      /* Menghilangkan background putih otomatis dari browser */
+      .form-dark:focus {
+          background-color: #000000 !important;
+          color: #ffffff !important;
+          border-color: var(--accent-color) !important;
+          box-shadow: 0 0 0 0.25 margin-bottom: rgba(255, 81, 47, 0.25);
+          outline: none;
+      }
+
+      /* Perbaikan untuk Autofill browser agar tidak jadi putih */
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus {
+          -webkit-text-fill-color: white !important;
+          -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
+          transition: background-color 5000s ease-in-out 0s;
+      }
+
+      label.small {
+          color: #ffffff;
+          font-weight: 500;
+          margin-bottom: 8px;
+          display: block;
+      }
+
+      .booking-container {
+          background: #0f0f0f;
+          border: 1px solid #222;
+          padding: 30px;
+          border-radius: 20px;
+      }
+
+      .res-display {
+          background: #000;
+          border: 1px solid #ff512f;
+          color: white;
+          padding: 15px;
+          border-radius: 10px;
+          text-align: center;
+          font-weight: bold;
+          margin-bottom: 25px;
+      }
+
+      .btn-booking {
+          background: var(--accent-gradient);
+          border: none;
+          color: white;
+          font-weight: 800;
+          padding: 15px;
+          border-radius: 8px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          transition: 0.3s;
+      }
+      .btn-booking:hover {
+          opacity: 0.9;
+          transform: scale(1.02);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero-section">
+      <video autoplay muted loop playsinline class="video-bg-full">
+        <source src="Video1.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay-dark"></div>
+
+      <div class="container" style="position: relative; z-index: 2">
+        <p
+          class="text-uppercase fw-bold mb-3"
+          style="color: var(--accent-color); letter-spacing: 3px"
+        >
+          Nusantara Memorial
+        </p>
+        <h1 class="fw-extrabold display-2 mb-3">
+          Peristirahatan Terakhir <br />Yang Penuh
+          <span style="color: var(--accent-color)">Kedamaian</span>
+        </h1>
+        <p class="lead mb-5" style="max-width: 650px; color: var(--text-sub)">
+          Reservasi lahan pemakaman eksklusif dengan sistem digital di
+          Indonesia. Aman, Terawat, dan Teduh.
+        </p>
+        <a
+          href="#pricing"
+          class="btn btn-lg px-5 py-3 text-white fw-bold"
+          style="background: var(--accent-gradient); border-radius: 50px"
+          >LIHAT PAKET</a
+        >
+      </div>
+    </section>
+
+    <section id="pricing" class="py-5">
+      <div class="container py-5">
+        <h2 class="text-center mb-5 fw-bold display-5">
+          Pilih <span style="color: var(--accent-color)">Paket Layanan</span>
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div
+              class="pricing-card card-single active"
+              id="btn-single"
+              onclick="changePackage('Single')"
+            >
+              <div class="card-body-custom">
+                <h3 class="fw-bold">Single</h3>
+                <p class="text-sub">1.5 x 3 Meter | Blok A-E</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.4)" />
+                <ul class="list-unstyled text-start mb-4">
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Harga
+                    Terjangkau
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Nisan
+                    Granit Solid
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Free
+                    Perawatan Rumput
+                  </li>
+                </ul>
+                <button class="btn btn-outline-light w-100 rounded-pill">
+                  PILIH BLOK A-E
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="pricing-card card-variant"
+              id="btn-variant"
+              onclick="changePackage('Single Varian')"
+            >
+              <div class="card-body-custom">
+                <h3 class="fw-bold">Single Varian</h3>
+                <p class="text-sub">4 x 3 Meter | Blok F-H</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.4)" />
+                <ul class="list-unstyled text-start mb-4">
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Dekat
+                    Walkway Utama
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Lahan
+                    Lebih Luas
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Free
+                    Biaya Bulanan
+                  </li>
+                </ul>
+                <button class="btn btn-outline-light w-100 rounded-pill">
+                  PILIH BLOK F-H
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="pricing-card card-double"
+              id="btn-double"
+              onclick="changePackage('Double')"
+            >
+              <div class="card-body-custom">
+                <h3 class="fw-bold">Double</h3>
+                <p class="text-sub">3.5 x 3.9 Meter | Blok I-J</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.4)" />
+                <ul class="list-unstyled text-start mb-4">
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Kavling
+                    Pasangan
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Pagar
+                    Pembatas Tanaman
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle me-2 text-danger"></i> Lokasi
+                    Premium
+                  </li>
+                </ul>
+                <button class="btn btn-outline-light w-100 rounded-pill">
+                  PILIH BLOK I-J
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="booking"
+      class="py-5"
+      style="background: #080808; border-top: 1px solid #222"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <h2 class="fw-bold mb-2">
+              Pilih <span style="color: var(--accent-color)">Lokasi</span>
+            </h2>
+            <p class="mb-4" style="color: #ffffff">
+              Silakan pilih slot aktif sesuai paket Anda (Blok A-J).
+            </p>
+            <div
+              id="gridPlot"
+              style="
+                display: grid;
+                grid-template-columns: repeat(10, 1fr);
+                gap: 10px;
+                background: #111;
+                padding: 20px;
+                border-radius: 15px;
+              "
+            ></div>
+          </div>
+
+          <div class="col-lg-5 ps-lg-5 mt-5 mt-lg-0">
+            <div class="booking-container">
+              <h4 class="mb-4 fw-bold text-white text-center">
+                Konfirmasi Booking
+              </h4>
+              <form id="finalForm">
+                <div class="res-display">
+                  <span id="res-paket">Single</span> |
+                  <span id="res-slot" class="text-warning">Pilih Slot</span>
+                </div>
+
+                <label class="small">Nama Lengkap Pemesan</label>
+                <input
+                  type="text"
+                  class="form-control form-dark mb-3"
+                  placeholder="Nama Pemesan"
+                  required
+                />
+
+                <label class="small">Nomor WhatsApp</label>
+                <input
+                  type="tel"
+                  class="form-control form-dark mb-4"
+                  placeholder="08123xxx"
+                  required
+                />
+
+                <hr style="border-color: #333" />
+                <h6
+                  class="text-danger fw-bold mb-3"
+                  style="font-size: 0.9rem; letter-spacing: 1px"
+                >
+                  DATA ALMARHUM/AH
+                </h6>
+
+                <label class="small">Nama Lengkap Almarhum</label>
+                <input
+                  type="text"
+                  class="form-control form-dark mb-3"
+                  placeholder="Nama Almarhum"
+                  required
+                />
+
+                <div class="row mb-4">
+                  <div class="col-6">
+                    <label class="small">Tanggal Lahir</label>
+                    <input type="date" class="form-control form-dark" />
+                  </div>
+                  <div class="col-6">
+                    <label class="small">Tanggal Wafat</label>
+                    <input type="date" class="form-control form-dark" />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-booking w-100">
+                  PESAN SEKARANG
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let currentPackage = "Single";
+      let selectedSlot = null;
+
+      const blocks = {
+        Single: ["A", "B", "C", "D", "E"],
+        "Single Varian": ["F", "G", "H"],
+        Double: ["I", "J"],
+      };
+
+      function changePackage(pkg) {
+        currentPackage = pkg;
+        document.getElementById("res-paket").innerText = pkg;
+        document.getElementById("res-slot").innerText = "Pilih Slot";
+        selectedSlot = null;
+
+        document
+          .querySelectorAll(".pricing-card")
+          .forEach((c) => c.classList.remove("active"));
+        if (pkg === "Single")
+          document.getElementById("btn-single").classList.add("active");
+        if (pkg === "Single Varian")
+          document.getElementById("btn-variant").classList.add("active");
+        if (pkg === "Double")
+          document.getElementById("btn-double").classList.add("active");
+
+        renderGrid();
+      }
+
+      function renderGrid() {
+        const container = document.getElementById("gridPlot");
+        container.innerHTML = "";
+        const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+        alphabet.forEach((letter) => {
+          for (let i = 1; i <= 10; i++) {
+            const slotId = letter + i;
+            const plot = document.createElement("div");
+            plot.className = "plot";
+            plot.innerText = slotId;
+
+            if (!blocks[currentPackage].includes(letter)) {
+              plot.classList.add("disabled");
+            } else {
+              plot.onclick = () => {
+                document
+                  .querySelectorAll(".plot")
+                  .forEach((p) => p.classList.remove("selected"));
+                plot.classList.add("selected");
+                selectedSlot = slotId;
+                document.getElementById("res-slot").innerText =
+                  "Slot " + slotId;
+              };
+            }
+            container.appendChild(plot);
+          }
+        });
+      }
+
+      document.getElementById("finalForm").onsubmit = (e) => {
+        e.preventDefault();
+        if (!selectedSlot)
+          return Swal.fire(
+            "Pilih Slot!",
+            "Klik nomor lokasi pada peta di bawah.",
+            "warning"
+          );
+        Swal.fire(
+          "Berhasil!",
+          "Data telah terkirim. Admin kami akan menghubungi Anda melalui WhatsApp.",
+          "success"
+        );
+      };
+
+      renderGrid();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
