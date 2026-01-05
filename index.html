@@ -402,7 +402,6 @@
     </section>
 
     <script>
-      // GANTI URL DI BAWAH DENGAN URL WEB APP HASIL DEPLOY APPS SCRIPT
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbxYrPQ5bhxtW9efrcWhKgJJbO1AJuJYMy3fQE6UEAODbsBzGLTHlArVA_qEjJtq0O_L/exec";
 
@@ -456,7 +455,6 @@
                 selectedSlot = slotId;
                 document.getElementById("res-slot").innerText =
                   "Slot " + slotId;
-                // Simpan info paket + slot ke input hidden
                 document.getElementById("input-tipe-slot").value =
                   currentPackage + " (" + selectedSlot + ")";
               };
@@ -488,8 +486,6 @@
             Swal.showLoading();
           },
         });
-
-        // Membuat data kiriman
         const formData = new FormData(form);
         formData.append("timestamp", new Date().toLocaleString("id-ID"));
 
